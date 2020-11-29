@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MailPage extends Page {
 
-  static String mailAddress;
+
   private static final String PAGE_URL = "https://10minutemail.com";
   @FindBy(xpath = "//input[@id=\"mail_address\"]")
   private WebElement fieldMailAddressInput;
@@ -24,11 +24,12 @@ public class MailPage extends Page {
     return this;
   }
 
-  public MailPage getMailAddress() {
+  public String getMailAddress() {
+    String mailAddress;
     do {
       mailAddress = waitVisibilityOf(fieldMailAddressInput).getAttribute("value");
     } while (!(mailAddress.contains("@")));
-    return this;
+    return mailAddress;
   }
 
   public MailPage openLetter() {

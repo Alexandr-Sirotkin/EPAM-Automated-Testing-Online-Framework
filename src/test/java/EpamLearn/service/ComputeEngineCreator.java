@@ -30,7 +30,7 @@ public class ComputeEngineCreator {
         TestDataReader.getTestData(TESTDATA_LOCAL_SSD),
         TestDataReader.getTestData(TESTDATA_DATACENTER_LOCATION),
         TestDataReader.getTestData(TESTDATA_COMMITTED_USAGE),
-        TestDataReader.getTestData(TESTDATA_EXPECTED_ESTIMATE));
+        Double.parseDouble(TestDataReader.getTestData(TESTDATA_EXPECTED_ESTIMATE)));
   }
 
 }

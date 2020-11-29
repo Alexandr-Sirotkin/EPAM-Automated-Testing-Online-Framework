@@ -16,12 +16,12 @@ public class ComputeEngine {
   private String localSSD;
   private String datacenterLocation;
   private String committedUsage;
-  private String expectedEstimate;
+  private Double expectedEstimate;
 
   public ComputeEngine(String numberOfInstances, String software, String machineClass,
       String series, String machineType, boolean addGPUs, String numberOfGPUs,
       String GPUType, String localSSD, String datacenterLocation, String committedUsage,
-      String expectedEstimate) {
+      double expectedEstimate) {
     this.numberOfInstances = numberOfInstances;
     this.software = software;
     this.machineClass = machineClass;
@@ -80,7 +80,7 @@ public class ComputeEngine {
     return committedUsage;
   }
 
-  public String getExpectedEstimate() {
+  public Double getExpectedEstimate() {
     return expectedEstimate;
   }
 

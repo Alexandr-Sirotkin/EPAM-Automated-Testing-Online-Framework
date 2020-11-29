@@ -4,28 +4,37 @@ import static org.testng.Assert.*;
 import EpamLearn.model.ComputeEngine;
 import EpamLearn.service.ComputeEngineCreator;
 import EpamLearn.service.GoogleCloudPricingCalculatorService;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class GoogleCloudPricingCalculatorTest extends CommonConditions{
+public class GoogleCloudPricingCalculatorTest extends CommonConditions {
 
   private GoogleCloudPricingCalculatorService service = new GoogleCloudPricingCalculatorService();
   private ComputeEngine computeEngine = ComputeEngineCreator.withCredentialsFromProperty();
+  private Double costFromEstimatePage;
+  public Double costFromMailPage;
 
-  @BeforeMethod
-  public void sendAndAcceptEstimate(){
-    service
+  @BeforeClass
+  public void sendAndAcceptEstimate() {
+    costFromEstimatePage = service
         .openGoogleCloudPricingCalculatorPage()
         .fillOutTheCalculatorForm(computeEngine)
-        .getAnEstimate()
-        .openMailPageAndGetEmailAddress()
-        .sendEstimateByMail()
-        .acceptLetterAndGetEstimate();
+        .getAnEstimate();
+    costFromMailPage = service.openMailPageAndSetEmailAddress()
+           .sendEstimateByMail()
+           .acceptLetterAndGetEstimate();
   }
 
-  @Test
-  public void comparePrices() {
-    assertEquals(service.costFromMailPage, service.costFromEstimatePage, "Цена в письме не соответствует цене на сайте.");
+  @Test(description = "Checking whether the price in the letter matches the price on the website.")
+  public void comparePricesInletterAndOnWebsite() {
+    assertEquals(costFromMailPage, costFromEstimatePage,
+        "Цена в письме не соответствует цене на сайте.");
+  }
+
+  @Test(description = "Checking whether the price in the letter matches the expected price.")
+  public void comparePriceWithExpected() {
+    assertEquals(costFromMailPage, computeEngine.getExpectedEstimate(),
+        "Ожидаемая цена не соответствует цене в письме.");
   }
 
 }

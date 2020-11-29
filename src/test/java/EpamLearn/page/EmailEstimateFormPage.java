@@ -10,8 +10,8 @@ public class EmailEstimateFormPage extends Page {
   @FindBy(xpath = "//button[@aria-label=\"Send Email\"]")
   private WebElement buttonSendEmailButton;
 
-  public EmailEstimateFormPage setEmail() {
-    waitVisibilityOf(fieldEmailInput).sendKeys(MailPage.mailAddress);
+  public EmailEstimateFormPage setEmail(String address) {
+    waitVisibilityOf(fieldEmailInput).sendKeys(address);
     return this;
   }
 

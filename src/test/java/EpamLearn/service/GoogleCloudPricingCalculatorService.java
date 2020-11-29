@@ -19,8 +19,8 @@ public class GoogleCloudPricingCalculatorService {
   private EstimatePage estimatePage;
   private MailPage mailPage;
   private String mailHandle;
-  public Double costFromEstimatePage;
-  public Double costFromMailPage;
+  private String mailAddress;
+
 
   public GoogleCloudPricingCalculatorService openGoogleCloudPricingCalculatorPage() {
     CloudGooglePage cloudGooglePage = new CloudGooglePage();
@@ -47,20 +47,19 @@ public class GoogleCloudPricingCalculatorService {
     return this;
   }
 
-  public GoogleCloudPricingCalculatorService getAnEstimate() {
+  public Double getAnEstimate() {
     estimatePage = googleCloudPricingCalculatorPage.calculateEstimate();
-    costFromEstimatePage = estimatePage.getCost();
-    return this;
+    return estimatePage.getCost();
   }
 
-  public GoogleCloudPricingCalculatorService openMailPageAndGetEmailAddress() {
+  public GoogleCloudPricingCalculatorService openMailPageAndSetEmailAddress() {
     ((JavascriptExecutor) driver).executeScript("window.open()");
     ArrayList<String> tabList = new ArrayList<>(driver.getWindowHandles());
     String estimateHandle = String.valueOf(tabList.get(0));
     mailHandle = String.valueOf(tabList.get(1));
     driver.switchTo().window(mailHandle);
     mailPage = new MailPage();
-    mailPage
+    mailAddress = mailPage
         .openPage()
         .getMailAddress();
     driver.switchTo().window(estimateHandle);
@@ -69,15 +68,15 @@ public class GoogleCloudPricingCalculatorService {
 
   public GoogleCloudPricingCalculatorService sendEstimateByMail() {
     EmailEstimateFormPage emailEstimateFormPage = estimatePage.sendByEmail();
-    emailEstimateFormPage.setEmail();
+    emailEstimateFormPage.setEmail(mailAddress);
     emailEstimateFormPage.sendEmail();
     return this;
   }
 
-  public void acceptLetterAndGetEstimate() {
+  public Double acceptLetterAndGetEstimate() {
     driver.switchTo().window(mailHandle);
     mailPage.openLetter();
-    costFromMailPage = mailPage.getCost();
+    return mailPage.getCost();
   }
 
 
