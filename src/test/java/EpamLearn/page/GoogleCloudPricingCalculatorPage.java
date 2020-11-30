@@ -90,9 +90,13 @@ public class GoogleCloudPricingCalculatorPage extends Page {
   }
 
   public GoogleCloudPricingCalculatorPage setMachineType(String machineTypeValue) {
-    if (driver instanceof FirefoxDriver) {
-      ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", waitVisibilityOf(seriesMdSelect));
-    }
+    log.info("В setMachineType!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+    waitElementToBeClickable(machineTypeMdSelect).click();
+    waitElementToBeClickable(machineTypeMdSelect).click();
+    waitElementToBeClickable(machineTypeMdSelect).click();
+    waitElementToBeClickable(machineTypeMdSelect).click();
+    waitElementToBeClickable(machineTypeMdSelect).click();
     waitElementToBeClickable(machineTypeMdSelect).click();
     log.info(" machineTypeMdSelect click!!!!!");
 //    waitVisibilityOf(machineTypeMdSelect).click();
