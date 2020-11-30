@@ -46,6 +46,8 @@ public class GoogleCloudPricingCalculatorPage extends Page {
   private String commitedUsageMdOption = "//div[@class=\"md-select-menu-container md-active md-clickable\"]//md-option[@ng-value=\"%s\"]";
   @FindBy(xpath = "//button[@ng-click=\"listingCtrl.addComputeServer(ComputeEngineForm);\"]")
   private WebElement AddToEstimateButton;
+  @FindBy(xpath = "//*[@class=\"md-select-backdrop md-click-catcher ng-scope\"]")
+  private WebElement mdBackdrop;
 
   public GoogleCloudPricingCalculatorPage goInTheFrame() {
     driver.switchTo().frame(0);
@@ -85,24 +87,25 @@ public class GoogleCloudPricingCalculatorPage extends Page {
     }
     waitVisibilityOf(seriesMdSelect).click();
     waitVisibilityOf(typeSeriesDiv, seriesValue).click();
-    waitVisibilityOf(typeSeriesDiv, seriesValue).click();
     log.info("Set Series: [" + seriesValue + "]");
     return this;
   }
 
   public GoogleCloudPricingCalculatorPage setMachineType(String machineTypeValue) {
 
-    try {
-      Thread.sleep(7000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    log.info("В setMachineType!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+    if (waitInvisibilityOf(mdBackdrop)){
+      waitVisibilityOf(machineTypeMdSelect).click();
     }
 
-    log.info("В setMachineType!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", machineTypeMdSelect);
 
-    waitElementToBeClickable(machineTypeMdSelect).click();
+
+
+//    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", machineTypeMdSelect);
 //    waitVisibilityOf(machineTypeMdSelect).click();
+    waitElementToBeClickable(machineTypeMdSelect).click();
+
     log.info(" machineTypeMdSelect click!!!!!");
 //    waitVisibilityOf(machineTypeMdSelect).click();
     waitVisibilityOf(machineTypeDiv, machineTypeValue).click();

@@ -24,6 +24,11 @@ public abstract class Page {
         .until(ExpectedConditions.visibilityOf(element));
   }
 
+  Boolean waitInvisibilityOf(WebElement element) {
+    return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+        .until(ExpectedConditions.invisibilityOf(element));
+  }
+
   WebElement waitElementToBeClickable(WebElement element) {
     return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
         .until(ExpectedConditions.elementToBeClickable(element));
