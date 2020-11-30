@@ -80,6 +80,9 @@ public class GoogleCloudPricingCalculatorPage extends Page {
   }
 
   public GoogleCloudPricingCalculatorPage setSeries(String seriesValue) {
+    if (driver instanceof FirefoxDriver) {
+      ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", waitVisibilityOf(machineClassMdSelect));
+    }
     waitVisibilityOf(seriesMdSelect).click();
     waitVisibilityOf(typeSeriesDiv, seriesValue).click();
     log.info("Set Series: [" + seriesValue + "]");
