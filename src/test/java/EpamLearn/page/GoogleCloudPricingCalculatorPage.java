@@ -80,9 +80,9 @@ public class GoogleCloudPricingCalculatorPage extends Page {
   }
 
   public GoogleCloudPricingCalculatorPage setSeries(String seriesValue) {
-    if (driver instanceof FirefoxDriver) {
-      ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", waitVisibilityOf(machineClassMdSelect));
-    }
+//    if (driver instanceof FirefoxDriver) {
+//      ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", waitVisibilityOf(machineClassMdSelect));
+//    }
     waitVisibilityOf(seriesMdSelect).click();
     waitVisibilityOf(typeSeriesDiv, seriesValue).click();
     log.info("Set Series: [" + seriesValue + "]");
@@ -90,15 +90,8 @@ public class GoogleCloudPricingCalculatorPage extends Page {
   }
 
   public GoogleCloudPricingCalculatorPage setMachineType(String machineTypeValue) {
-    try {
-      Thread.sleep(4000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    do {
-      waitElementToBeClickable(machineTypeMdSelect).click();
-    } while (!(machineTypeMdSelect.isEnabled() && machineTypeMdSelect.isDisplayed()));
 
+    waitElementToBeClickable(machineTypeMdSelect).click();
     log.info(" machineTypeMdSelect click!!!!!");
 //    waitVisibilityOf(machineTypeMdSelect).click();
     waitVisibilityOf(machineTypeDiv, machineTypeValue).click();
