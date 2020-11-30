@@ -92,22 +92,12 @@ public class GoogleCloudPricingCalculatorPage extends Page {
   }
 
   public GoogleCloudPricingCalculatorPage setMachineType(String machineTypeValue) {
-
-    log.info("В setMachineType!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-    if (waitInvisibilityOf(mdBackdrop)){
-      waitVisibilityOf(machineTypeMdSelect).click();
-    }
-
-
-
-
+//    if (waitInvisibilityOf(mdBackdrop)){
+//      waitVisibilityOf(machineTypeMdSelect).click();
+//    }
 //    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", machineTypeMdSelect);
-//    waitVisibilityOf(machineTypeMdSelect).click();
-    waitElementToBeClickable(machineTypeMdSelect).click();
-
-    log.info(" machineTypeMdSelect click!!!!!");
-//    waitVisibilityOf(machineTypeMdSelect).click();
+//    waitElementToBeClickable(machineTypeMdSelect).click();
+    waitVisibilityOf(machineTypeMdSelect).click();
     waitVisibilityOf(machineTypeDiv, machineTypeValue).click();
     log.info("Set Machine Type: [" + machineTypeValue + "]");
     return this;
@@ -127,11 +117,7 @@ public class GoogleCloudPricingCalculatorPage extends Page {
 
   public GoogleCloudPricingCalculatorPage setLocalSSD(String localSSDValue) {
     if (driver instanceof FirefoxDriver) {
-//      Actions actions = new Actions(driver);
-//    actions.moveToElement(localSSDMDSelect);
-//    actions.perform();
       ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", waitVisibilityOf(machineTypeMdSelect));
-//    ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
     }
     waitVisibilityOf(localSSDMDSelect).click();
     waitVisibilityOf(localSSDDiv, localSSDValue).click();

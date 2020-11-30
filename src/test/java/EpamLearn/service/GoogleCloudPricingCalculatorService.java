@@ -9,14 +9,11 @@ import EpamLearn.page.GoogleCloudPricingCalculatorPage;
 import EpamLearn.page.MailPage;
 import EpamLearn.page.SearchResultsForGoogleCloudPage;
 import java.util.ArrayList;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class GoogleCloudPricingCalculatorService {
 
-  private Logger log = LogManager.getRootLogger();
   private WebDriver driver = DriverSingleton.getDriver();
   private GoogleCloudPricingCalculatorPage googleCloudPricingCalculatorPage;
   private EstimatePage estimatePage;
@@ -72,13 +69,9 @@ public class GoogleCloudPricingCalculatorService {
   }
 
   public GoogleCloudPricingCalculatorService sendEstimateByMail() {
-    log.info("Внутри GoogleCloudPricingCalculatorService sendEstimateByMail() до всего");
     EmailEstimateFormPage emailEstimateFormPage = estimatePage.sendByEmail();
-    log.info("создан emailEstimateFormPage");
     emailEstimateFormPage.setEmail(mailAddress);
-    log.info("задан mailAddress");
     emailEstimateFormPage.sendEmail();
-    log.info("отправлено письмо");
     return this;
   }
 
