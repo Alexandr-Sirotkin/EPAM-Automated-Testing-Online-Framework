@@ -1,14 +1,14 @@
 package EpamLearn.page;
 
-import EpamLearn.wait.PageLoadingConditions;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MailPage extends Page {
 
-
+  private Logger log = LogManager.getRootLogger();
   private static final String PAGE_URL = "https://10minutemail.com";
   @FindBy(xpath = "//input[@id=\"mail_address\"]")
   private WebElement fieldMailAddressInput;
@@ -20,7 +20,8 @@ public class MailPage extends Page {
 
   public MailPage openPage() {
     driver.get(PAGE_URL);
-    new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(PageLoadingConditions.jQueryAJAXsCompleted());
+//    new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(PageLoadingConditions.jQueryAJAXsCompleted());
+    log.info("Email page is open");
     return this;
   }
 
@@ -29,17 +30,20 @@ public class MailPage extends Page {
     do {
       mailAddress = waitVisibilityOf(fieldMailAddressInput).getAttribute("value");
     } while (!(mailAddress.contains("@")));
+    log.info("Email address received");
     return mailAddress;
   }
 
   public MailPage openLetter() {
     waitVisibilityOf(messageFromEstimatePageSpan).click();
+    log.info("Incoming email is open");
     return this;
   }
 
   public Double getCost() {
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",
         waitVisibilityOf(totalEstimatedCostPerMonthH3));
+    log.info("The cost from the letter is taken");
     return Double.parseDouble(
         waitVisibilityOf(totalEstimatedCostPerMonthH3).getText().replaceAll("[^0-9.]", ""));
   }

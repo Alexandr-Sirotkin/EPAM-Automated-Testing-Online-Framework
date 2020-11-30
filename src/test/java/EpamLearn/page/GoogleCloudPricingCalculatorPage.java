@@ -2,7 +2,9 @@ package EpamLearn.page;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class GoogleCloudPricingCalculatorPage extends Page {
@@ -104,6 +106,13 @@ public class GoogleCloudPricingCalculatorPage extends Page {
   }
 
   public GoogleCloudPricingCalculatorPage setLocalSSD(String localSSDValue) {
+    if (driver instanceof FirefoxDriver) {
+//      Actions actions = new Actions(driver);
+//    actions.moveToElement(localSSDMDSelect);
+//    actions.perform();
+      ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", waitVisibilityOf(machineTypeMdSelect));
+//    ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+    }
     waitVisibilityOf(localSSDMDSelect).click();
     waitVisibilityOf(localSSDDiv, localSSDValue).click();
     log.info("Set Local SSD: [" + localSSDValue + "]");
