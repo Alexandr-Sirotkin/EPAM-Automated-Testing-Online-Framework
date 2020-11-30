@@ -91,10 +91,10 @@ public class GoogleCloudPricingCalculatorPage extends Page {
 
   public GoogleCloudPricingCalculatorPage setMachineType(String machineTypeValue) {
     log.info("В setMachineType!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", machineTypeMdSelect);
 
-    ((JavascriptExecutor) driver).executeScript("document.getElements(machineTypeMdSelect)[0].click();");
 //    waitElementToBeClickable(machineTypeMdSelect).click();
-
+//    waitVisibilityOf(machineTypeMdSelect).click();
     log.info(" machineTypeMdSelect click!!!!!");
 //    waitVisibilityOf(machineTypeMdSelect).click();
     waitVisibilityOf(machineTypeDiv, machineTypeValue).click();
