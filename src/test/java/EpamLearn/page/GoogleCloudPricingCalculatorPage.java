@@ -94,6 +94,7 @@ public class GoogleCloudPricingCalculatorPage extends Page {
       ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", waitVisibilityOf(seriesMdSelect));
     }
     waitElementToBeClickable(machineTypeMdSelect).click();
+    log.info(" machineTypeMdSelect click!!!!!");
 //    waitVisibilityOf(machineTypeMdSelect).click();
     waitVisibilityOf(machineTypeDiv, machineTypeValue).click();
     log.info("Set Machine Type: [" + machineTypeValue + "]");
