@@ -85,6 +85,7 @@ public class GoogleCloudPricingCalculatorPage extends Page {
     }
     waitVisibilityOf(seriesMdSelect).click();
     waitVisibilityOf(typeSeriesDiv, seriesValue).click();
+    waitVisibilityOf(typeSeriesDiv, seriesValue).click();
     log.info("Set Series: [" + seriesValue + "]");
     return this;
   }
