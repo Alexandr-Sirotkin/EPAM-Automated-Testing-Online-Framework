@@ -24,6 +24,11 @@ public abstract class Page {
         .until(ExpectedConditions.visibilityOf(element));
   }
 
+  WebElement waitElementToBeClickable(WebElement element) {
+    return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+        .until(ExpectedConditions.elementToBeClickable(element));
+  }
+
   WebElement waitVisibilityOf(String locator, String value) {
     return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
         .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, value))));
